@@ -55,7 +55,7 @@ export default function Dashboard() {
               <AvatarImage src="/placeholder-user.jpg" />
               <AvatarFallback>AB</AvatarFallback>
             </Avatar>
-            <div>
+            <div className="text-left">
               <p className="text-sm font-medium">Complete your profile!</p>
               <p className="text-xs text-gray-500">
                 For better recommendations please provide your details.
@@ -101,8 +101,10 @@ export default function Dashboard() {
           <Button variant="default">View Details</Button>
         </section>
         <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Hello, Tom!</h2>
-          <p className="text-gray-600 mb-4">What Do You Want To Create.</p>
+          <h2 className="text-2xl font-bold mb-4 text-left">Hello, Tom!</h2>
+          <p className="text-gray-600 mb-4 text-left">
+            What Do You Want To Create.
+          </p>
           <div className="flex space-x-4 mb-8">
             <Button variant="default" className="flex items-center space-x-2">
               <FileIcon className="w-5 h-5" />
@@ -132,7 +134,7 @@ export default function Dashboard() {
             <TabsContent value="all">
               <div className="grid gap-4 md:grid-cols-3">
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="text-left">
                     <CardTitle>My Resume</CardTitle>
                     <CardDescription>Last Updated 2 days ago</CardDescription>
                   </CardHeader>
@@ -149,7 +151,7 @@ export default function Dashboard() {
                   </CardFooter>
                 </Card>
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="text-left">
                     <CardTitle>My Resume</CardTitle>
                     <CardDescription>Last Updated 2 days ago</CardDescription>
                   </CardHeader>
@@ -166,7 +168,7 @@ export default function Dashboard() {
                   </CardFooter>
                 </Card>
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="text-left">
                     <CardTitle>My Resume</CardTitle>
                     <CardDescription>Last Updated 2 days ago</CardDescription>
                   </CardHeader>
@@ -187,10 +189,12 @@ export default function Dashboard() {
           </Tabs>
         </section>
         <section>
-          <h2 className="text-xl font-bold mb-4">Best Templates For You!</h2>
+          <h2 className="text-xl font-bold mb-4 text-left">
+            Best Templates For You!
+          </h2>
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
-              <CardHeader>
+              <CardHeader className="text-left">
                 <CardTitle>Unsure About Your Resume?</CardTitle>
                 <CardDescription>
                   Send it our way and let our experts review and bring it to
@@ -206,7 +210,7 @@ export default function Dashboard() {
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
+              <CardHeader className="text-left">
                 <CardTitle>Resume Examples For Every Industry</CardTitle>
                 <CardDescription>
                   We'll show you the type of language used in your field.
