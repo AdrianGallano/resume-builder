@@ -28,7 +28,7 @@ export default function Dashboard() {
       <Sidebar />
       <main className="flex-1 p-8">
         <Headerx />
-        <section className="mb-8 p-4 bg-blue-50 rounded-lg flex items-center justify-between">
+        <section className="mt-8 mb-8 p-4 bg-blue-50 rounded-lg flex items-center justify-between">
           <div>
             <p className="text-lg font-semibold">
               Get access to 1000+ Premium Resume Templates at $23.50 USD / Code

@@ -6,7 +6,7 @@ import "../app/globals.css";
 
 export default function Headerx() {
   return (
-    <header className="flex items-center justify-between mb-8">
+    <header className="flex items-center justify-between">
       <div className="flex items-center space-x-4">
         <Input
           type="search"
