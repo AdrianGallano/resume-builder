@@ -4,6 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from "../@/components/ui/tabs";
 import { Avatar, AvatarImage, AvatarFallback } from "../@/components/ui/avatar";
 import { Label } from "../@/components/ui/label";
 import { Input } from "../@/components/ui/input";
+import { Badge } from "../@/components/ui/badge"
 import {
   Select,
   SelectTrigger,
@@ -21,6 +22,31 @@ export default function Resume() {
   const handleTabChange = (value: string) => {
     setSelectedTab(value);
   };
+
+  const [industryKnowledge, setIndustryKnowledge] = useState([
+    "Product Design",
+    "User Interface",
+    "User Experience",
+    "Wireframing",
+    "SaaS",
+    "Interaction Design",
+    "Wire-framing",
+    "Mobile Application",
+    "Web Application",
+    "User Flow",
+  ])
+  const [toolsTechnologies, setToolsTechnologies] = useState([
+    "Figma",
+    "Sketch",
+    "ProtoPie",
+    "Framer",
+    "Invision",
+    "Abstract",
+    "Amplitude",
+    "Zeplin",
+    "Google Analytics",
+  ])
+  const [otherSkills, setOtherSkills] = useState(["HTML", "CSS", "jQuery"])
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -252,17 +278,119 @@ export default function Resume() {
           )}
 
           {selectedTab === "education" && (
-            <div>
-              <h2 className="text-2xl font-bold mb-2">Education</h2>
-              {/* Add education form content here */}
+            <div className="flex-1 space-y-4">
+              <h2 className="text-2xl font-bold">Education</h2>
+              <p className="text-muted-foreground">Review your education history</p>
+              <div className="mt-4 space-y-4">
+                <div className="flex items-start justify-between p-4 border rounded-md shadow-sm">
+                  <div>
+                    <h3 className="text-lg font-semibold">BFA Industrial Design</h3>
+                    <p>Rhode Island School - 2013</p>
+                    <p className="text-muted-foreground">Top 3% class GPA</p>
+                  </div>
+                  <div className="flex space-x-2">
+                    <Button variant="ghost" size="icon">
+                      <FilePenIcon className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <TrashIcon className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+                <div className="flex items-start justify-between p-4 border rounded-md shadow-sm">
+                  <div>
+                    <h3 className="text-lg font-semibold">Best SAT Distinction</h3>
+                    <p>Mayor of Ohio - 2016</p>
+                    <p className="text-muted-foreground">Top 3% class GPA</p>
+                  </div>
+                  <div className="flex space-x-2">
+                    <Button variant="ghost" size="icon">
+                      <FilePenIcon className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <TrashIcon className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+                <Button variant="outline" className="flex items-center space-x-2">
+                  <PlusIcon className="w-4 h-4" />
+                  <span>Add Education</span>
+                </Button>
+              </div>
+              <div className="flex justify-between mt-8">
+                <Button variant="outline">Back</Button>
+                <Button>Save & Next</Button>
+              </div>
             </div>
           )}
 
           {selectedTab === "skills" && (
-            <div>
-              <h2 className="text-2xl font-bold mb-2">Skills</h2>
-              {/* Add skills form content here */}
+            <div className="flex-1 space-y-4">
+            <Tabs>
+              <div>
+                <div>
+                  <div className="space-y-4">
+                    <h2 className="text-2xl font-bold">Skills</h2>
+                    <p className="text-muted-foreground">Highlight six to eight of your top skills</p>
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="font-semibold">Industry Knowledge</h3>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {industryKnowledge.map((skill, index) => (
+                            <Badge key={index} variant="secondary">
+                              {skill}{" "}
+                              <Button variant="ghost" size="sm">
+                                ×
+                              </Button>
+                            </Badge>
+                          ))}
+                          <Button variant="outline" size="sm">
+                            Add skills
+                          </Button>
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold">Tools & Technologies</h3>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {toolsTechnologies.map((skill, index) => (
+                            <Badge key={index} variant="secondary">
+                              {skill}{" "}
+                              <Button variant="ghost" size="sm">
+                                ×
+                              </Button>
+                            </Badge>
+                          ))}
+                          <Button variant="outline" size="sm">
+                            Add skills
+                          </Button>
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold">Other Skills</h3>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {otherSkills.map((skill, index) => (
+                            <Badge key={index} variant="secondary">
+                              {skill}{" "}
+                              <Button variant="ghost" size="sm">
+                                ×
+                              </Button>
+                            </Badge>
+                          ))}
+                          <Button variant="outline" size="sm">
+                            Add skills
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Tabs>
+            <div className="flex justify-between mt-8">
+              <Button variant="outline">Back</Button>
+              <Button className="bg-primary text-primary-foreground">Save & Next</Button>
             </div>
+          </div>
           )}
         </section>
         <section className="flex-1 p-4 bg-white rounded-lg shadow">
