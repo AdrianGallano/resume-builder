@@ -2,20 +2,20 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("resume/", views.ResumeViewSet.as_view({"get": "list", "post": "create"})),
+    path("resumes/", views.ResumeViewSet.as_view({"get": "list", "post": "create"})),
     path(
         "resume-templates/",
         views.ResumeTemplatesViewSet.as_view({"get": "list", "post": "create"}),
     ),
     path(
-        "personal-information/",
+        "personal-informations/",
         views.PersonalInformationViewSet.as_view({"get": "list", "post": "create"}),
     ),
     path(
-        "education/", views.EducationViewSet.as_view({"get": "list", "post": "create"})
+        "educations/", views.EducationViewSet.as_view({"get": "list", "post": "create"})
     ),
     path(
-        "work-experience/",
+        "work-experiences",
         views.WorkExperienceViewSet.as_view({"get": "list", "post": "create"}),
     ),
     path("skills/", views.SkillsViewSet.as_view({"get": "list", "post": "create"})),
@@ -25,7 +25,7 @@ urlpatterns = [
         views.CertificationsViewSet.as_view({"get": "list", "post": "create"}),
     ),
     path(
-        "resume/<int:pk>/",
+        "resumes/<int:pk>/",
         views.ResumeViewSet.as_view(
             {"get": "retrieve", "put": "update", "delete": "destroy"}
         ),
@@ -37,19 +37,19 @@ urlpatterns = [
         ),
     ),
     path(
-        "personal-information/<int:pk>/",
+        "personal-informations/<int:pk>/",
         views.PersonalInformationViewSet.as_view(
             {"get": "retrieve", "put": "update", "delete": "destroy"}
         ),
     ),
     path(
-        "education/<int:pk>/",
+        "educations/<int:pk>/",
         views.EducationViewSet.as_view(
             {"get": "retrieve", "put": "update", "delete": "destroy"}
         ),
     ),
     path(
-        "work-experience/<int:pk>/",
+        "work-experiences/<int:pk>/",
         views.WorkExperienceViewSet.as_view(
             {"get": "retrieve", "put": "update", "delete": "destroy"}
         ),

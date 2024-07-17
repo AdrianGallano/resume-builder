@@ -10,6 +10,8 @@ python-dotenv = "*"
 mysqlclient = "*"
 djoser = "*"
 djangorestframework-simplejwt = "*"
+drf-yasg = "*"
+setuptools = "*"
 
 [dev-packages]
 
