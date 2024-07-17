@@ -11,10 +11,6 @@ from .models import (
 )
 
 
-
-    
-
-
 class ResumeTemplatesSerializer(ModelSerializer):
     class Meta:
         model = ResumeTemplates
@@ -58,12 +54,12 @@ class CertificationsSerializer(ModelSerializer):
 
 
 class ResumeSerializer(ModelSerializer):
-    personal_information = PersonalInformationSerializer()
-    education = EducationSerializer(many=True)
-    work_experience = WorkExperienceSerializer(many=True)
-    skills = SkillsSerializer(many=True)
-    projects = ProjectsSerializer(many=True)
-    certifications = CertificationsSerializer(many=True)
+    education = EducationSerializer(many=True, read_only=True)
+    work_experience = WorkExperienceSerializer(many=True, read_only=True)
+    skills = SkillsSerializer(many=True, read_only=True)
+    projects = ProjectsSerializer(many=True, read_only=True)
+    certifications = CertificationsSerializer(many=True, read_only=True)
+    personal_information = PersonalInformationSerializer(read_only=True)
 
     class Meta:
         model = Resume
