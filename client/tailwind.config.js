@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        heading: ["var(--font-heading)", ...fontFamily.sans],
-        body: ["var(--font-body)", ...fontFamily.sans],
+        heading: ["Inter", ...fontFamily.sans],
+        body: ["Inter", ...fontFamily.sans],
       },
       colors: {
         border: "hsl(var(--border))",

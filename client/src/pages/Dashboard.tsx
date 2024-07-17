@@ -19,78 +19,15 @@ import {
 } from "../@/components/ui/card";
 import "../app/globals.css";
 import { Badge } from "../@/components/ui/badge";
+import Sidebar from "../components/Sidebar";
+import Headerx from "../components/Header";
 
 export default function Dashboard() {
   return (
     <div className="flex min-h-screen">
-      <aside className="w-64 p-4 bg-gray-50">
-        <div className="flex items-center mb-8">
-          <span className="text-xl font-bold">Resume Builder</span>
-        </div>
-        <nav className="space-y-4">
-          <Link to="#" className="flex items-center space-x-2 text-gray-900">
-            <HomeIcon className="w-5 h-5" />
-            <span>Dashboard</span>
-          </Link>
-          <Link to="#" className="flex items-center space-x-2 text-gray-600">
-            <LayoutTemplateIcon className="w-5 h-5" />
-            <span>Template Gallery</span>
-          </Link>
-          <Link to="#" className="flex items-center space-x-2 text-gray-600">
-            <FilesIcon className="w-5 h-5" />
-            <span>Documents</span>
-          </Link>
-          <Link to="#" className="flex items-center space-x-2 text-gray-600">
-            <LinkIcon className="w-5 h-5" />
-            <span>Profile</span>
-          </Link>
-          <Link to="#" className="flex items-center space-x-2 text-gray-600">
-            <AppleIcon className="w-5 h-5" />
-            <span>Settings</span>
-          </Link>
-        </nav>
-        <div className="mt-8 p-4 bg-white rounded-lg shadow">
-          <div className="flex items-center space-x-4">
-            <Avatar>
-              <AvatarImage src="/placeholder-user.jpg" />
-              <AvatarFallback>AB</AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="text-sm font-medium">Complete your profile!</p>
-              <p className="text-xs text-gray-500">
-                For better recommendations please provide your details.
-              </p>
-            </div>
-          </div>
-          <div className="mt-4 flex items-center space-x-2">
-            <Progress value={50} className="w-full" />
-            <Button variant="outline" className="ml-auto">
-              Complete Now
-            </Button>
-          </div>
-        </div>
-      </aside>
+      <Sidebar />
       <main className="flex-1 p-8">
-        <header className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-4">
-            <Input
-              type="search"
-              placeholder="Search or type a command"
-              className="w-64"
-            />
-            <span className="text-gray-500">⌘ F</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <Button variant="default">Hire Professional</Button>
-            <Button variant="ghost" size="icon">
-              <BellIcon className="w-6 h-6" />
-            </Button>
-            <Avatar>
-              <AvatarImage src="/placeholder-user.jpg" />
-              <AvatarFallback>AB</AvatarFallback>
-            </Avatar>
-          </div>
-        </header>
+        <Headerx />
         <section className="mb-8 p-4 bg-blue-50 rounded-lg flex items-center justify-between">
           <div>
             <p className="text-lg font-semibold">
@@ -101,8 +38,10 @@ export default function Dashboard() {
           <Button variant="default">View Details</Button>
         </section>
         <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Hello, Tom!</h2>
-          <p className="text-gray-600 mb-4">What Do You Want To Create.</p>
+          <h2 className="text-2xl font-bold mb-4 text-left">Hello, Tom!</h2>
+          <p className="text-gray-600 mb-4 text-left">
+            What Do You Want To Create.
+          </p>
           <div className="flex space-x-4 mb-8">
             <Button variant="default" className="flex items-center space-x-2">
               <FileIcon className="w-5 h-5" />
@@ -132,7 +71,7 @@ export default function Dashboard() {
             <TabsContent value="all">
               <div className="grid gap-4 md:grid-cols-3">
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="text-left">
                     <CardTitle>My Resume</CardTitle>
                     <CardDescription>Last Updated 2 days ago</CardDescription>
                   </CardHeader>
@@ -149,7 +88,7 @@ export default function Dashboard() {
                   </CardFooter>
                 </Card>
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="text-left">
                     <CardTitle>My Resume</CardTitle>
                     <CardDescription>Last Updated 2 days ago</CardDescription>
                   </CardHeader>
@@ -166,7 +105,7 @@ export default function Dashboard() {
                   </CardFooter>
                 </Card>
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="text-left">
                     <CardTitle>My Resume</CardTitle>
                     <CardDescription>Last Updated 2 days ago</CardDescription>
                   </CardHeader>
@@ -187,10 +126,12 @@ export default function Dashboard() {
           </Tabs>
         </section>
         <section>
-          <h2 className="text-xl font-bold mb-4">Best Templates For You!</h2>
+          <h2 className="text-xl font-bold mb-4 text-left">
+            Best Templates For You!
+          </h2>
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
-              <CardHeader>
+              <CardHeader className="text-left">
                 <CardTitle>Unsure About Your Resume?</CardTitle>
                 <CardDescription>
                   Send it our way and let our experts review and bring it to
@@ -206,7 +147,7 @@ export default function Dashboard() {
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
+              <CardHeader className="text-left">
                 <CardTitle>Resume Examples For Every Industry</CardTitle>
                 <CardDescription>
                   We'll show you the type of language used in your field.
