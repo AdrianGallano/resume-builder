@@ -4,7 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-fastapi = "*"
+django = "*"
+djangorestframework = "*"
+python-dotenv = "*"
+mysqlclient = "*"
+djoser = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
