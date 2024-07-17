@@ -11,10 +11,8 @@ from .models import (
 )
 
 
-class ResumeSerializer(ModelSerializer):
-    class Meta:
-        model = Resume
-        fields = "__all__"
+
+    
 
 
 class ResumeTemplatesSerializer(ModelSerializer):
@@ -56,4 +54,17 @@ class ProjectsSerializer(ModelSerializer):
 class CertificationsSerializer(ModelSerializer):
     class Meta:
         model = Certifications
+        fields = "__all__"
+
+
+class ResumeSerializer(ModelSerializer):
+    personal_information = PersonalInformationSerializer()
+    education = EducationSerializer(many=True)
+    work_experience = WorkExperienceSerializer(many=True)
+    skills = SkillsSerializer(many=True)
+    projects = ProjectsSerializer(many=True)
+    certifications = CertificationsSerializer(many=True)
+
+    class Meta:
+        model = Resume
         fields = "__all__"

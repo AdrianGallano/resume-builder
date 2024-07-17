@@ -12,6 +12,7 @@ djoser = "*"
 djangorestframework-simplejwt = "*"
 drf-yasg = "*"
 setuptools = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
