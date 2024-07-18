@@ -13,6 +13,7 @@ djangorestframework-simplejwt = "*"
 drf-yasg = "*"
 setuptools = "*"
 django-cors-headers = "*"
+django-filter = "*"
 
 [dev-packages]
 
