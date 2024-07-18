@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../@/components/ui/input';
 import { Button } from '../@/components/ui/button';
 import { IFormInput, schema } from '../Schemas/LoginSchema';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import COVER_IMG from '../assets/images/blue-cover.jpg';
 import { useLoginMutation } from '../redux/api/authApi';
 import { useAppDispatch } from '../redux/hooks';
@@ -18,6 +18,7 @@ const Login: React.FC = () => {
   const [errorDetail, setErrorDetail] = useState<string | null>(null); // State to hold error detail message
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const navigate=useNavigate()
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
@@ -26,6 +27,7 @@ const Login: React.FC = () => {
         token: result.access,
         refreshToken: result.refresh,
       }));
+      navigate('/dash')
       console.log('Login successful:', result);
       // Handle successful login (e.g., redirect to dashboard)
     } catch (err: any) {
