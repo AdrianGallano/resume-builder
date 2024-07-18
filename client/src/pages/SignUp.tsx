@@ -4,44 +4,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../@/components/ui/input';
 import { Button } from '../@/components/ui/button';
 import { IFormInput, SignUpSchema } from '../Schemas/SignUpSchema';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import COVER_IMG from '../assets/images/blue-cover.jpg';
-import { useSignUpMutation } from '../redux/api/authApi';
-import { setAuthDataOnSignup } from '../redux/features/authSlice';
-import { useAppDispatch } from '../redux/hooks';
+import { useSignUp } from '../hooks/useSignup';
 
 const SignUp: React.FC = () => {
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
-  const [signUp, { isLoading }] = useSignUpMutation();
+  const { handleSignUp, isLoading } = useSignUp();
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
     resolver: zodResolver(SignUpSchema),
   });
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    try {
-      const { confirmPassword, ...formData } = data;
-      const result = await signUp(formData).unwrap();
-      dispatch(setAuthDataOnSignup({
-        username: result.username,
-        email: result.email,
-        id: result.id,
-      }));
-      navigate('/login');
-    } catch (err: any) {
-      if (err.status === 400 && err.data) {
-        const errorMessages = ([] as string[]).concat(
-          ...Object.values(err.data).map(error =>
-            Array.isArray(error) ? error : [error]
-          )
-        );
-        setErrorMessages(errorMessages);
-      } else {
-        console.error('Failed to sign up:', err);
-        setErrorMessages(['Failed to sign up. Please make sure the password and username are unique and different']);
-      }
-    }
+    setErrorMessages([]); // Reset error messages before signup attempt
+    await handleSignUp(data, setErrorMessages);
   };
 
   return (
@@ -93,7 +69,9 @@ const SignUp: React.FC = () => {
               />
               {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword?.message}</p>}
             </div>
-            <Button type="submit" className="w-full bg-blue-500 text-white rounded">Sign Up</Button>
+            <Button type="submit" className="w-full bg-blue-500 text-white rounded" disabled={isLoading}>
+              {isLoading ? 'Signing up...' : 'Sign Up'}
+            </Button>
             {errorMessages.length > 0 && (
               <div className="mt-4 text-red-500">
                 {errorMessages.map((error, index) => (
