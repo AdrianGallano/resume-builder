@@ -4,11 +4,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../@/components/ui/input';
 import { Button } from '../@/components/ui/button';
 import { IFormInput, schema } from '../Schemas/LoginSchema';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import COVER_IMG from '../assets/images/blue-cover.jpg';
-import { useLoginMutation } from '../redux/api/authApi';
-import { useAppDispatch } from '../redux/hooks';
-import { setAuthTokensOnLogin } from '../redux/features/authSlice';
+import { useLogin } from '../hooks/useLogin';
 
 const Login: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
@@ -16,26 +14,17 @@ const Login: React.FC = () => {
   });
 
   const [errorDetail, setErrorDetail] = useState<string | null>(null); // State to hold error detail message
-  const [login, { isLoading }] = useLoginMutation();
-  const dispatch = useAppDispatch();
+  const { handleLogin, isLoading, isError, error } = useLogin();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    setErrorDetail(null); 
     try {
-      const result = await login(data).unwrap();
-      dispatch(setAuthTokensOnLogin({
-        token: result.access,
-        refreshToken: result.refresh,
-      }));
-      console.log('Login successful:', result);
-      // Handle successful login (e.g., redirect to dashboard)
-    } catch (err: any) {
-      if (err.data && err.data.detail) {
-        setErrorDetail(err.data.detail);
-      } else {
-        setErrorDetail('Failed to login. Please try again later.'); // Fallback message
-      }
+      await handleLogin(data, setErrorDetail);
+    } catch (err) {
+      // Additional error handling if needed
     }
   };
+
 
   return (
     <div className="flex h-screen">
