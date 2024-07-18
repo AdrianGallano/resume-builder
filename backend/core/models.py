@@ -7,12 +7,16 @@ class Resume(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.title
 
 class ResumeTemplates(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     template_file = models.FileField(upload_to='templates/')
 
+    def __str__(self):
+        return self.name
 
 class PersonalInformation(models.Model):
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
@@ -23,7 +27,9 @@ class PersonalInformation(models.Model):
     linkedIn = models.URLField(blank=True, null=True)
     github = models.URLField(blank=True, null=True)
     website = models.URLField(blank=True, null=True)
-
+    
+    def __str__(self):
+        return self.full_name
 
 class Education(models.Model):
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
@@ -34,7 +40,9 @@ class Education(models.Model):
     end_date = models.DateField(blank=True, null=True)
     grade = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-
+    
+    def __str__(self):
+        return self.degree
 
 class WorkExperience(models.Model):
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
@@ -43,13 +51,17 @@ class WorkExperience(models.Model):
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-
+    
+    def __str__(self):
+        return self.position
 
 class Skills(models.Model):
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     proficiency = models.CharField(max_length=50)  
 
+    def __str__(self):
+        return self.name
 
 class Projects(models.Model):
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
@@ -57,6 +69,8 @@ class Projects(models.Model):
     description = models.TextField()
     link = models.URLField(blank=True, null=True)
 
+    def __str__(self):
+        return self.title
 
 class Certifications(models.Model):
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
@@ -66,3 +80,6 @@ class Certifications(models.Model):
     expiration_date = models.DateField(blank=True, null=True)
     credential_id = models.CharField(max_length=255, blank=True, null=True)
     credential_url = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
