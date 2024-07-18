@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Avatar, AvatarImage, AvatarFallback } from "../@/components/ui/avatar";
 import { Progress } from "../@/components/ui/progress";
 import { Button } from "../@/components/ui/button";
@@ -23,6 +23,7 @@ import Sidebar from "../components/Sidebar";
 import Headerx from "../components/Header";
 
 export default function Dashboard() {
+  const navigate=useNavigate()
   return (
     <div className="flex min-h-screen">
       <Sidebar />
@@ -43,7 +44,8 @@ export default function Dashboard() {
             What Do You Want To Create.
           </p>
           <div className="flex space-x-4 mb-8">
-            <Button variant="default" className="flex items-center space-x-2">
+            <Button variant="default" className="flex items-center space-x-2"
+            onClick={()=>navigate('/resume')}>
               <FileIcon className="w-5 h-5" />
               <span>Resume</span>
             </Button>
