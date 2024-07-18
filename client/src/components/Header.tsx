@@ -16,7 +16,7 @@ export default function Headerx() {
         <span className="text-gray-500">⌘ F</span>
       </div>
       <div className="flex items-center space-x-4">
-        <Button variant="default">Hire Professional</Button>
+        <Button variant="default">Get Started</Button>
         <Button variant="ghost" size="icon">
           <BellIcon className="w-6 h-6" />
         </Button>

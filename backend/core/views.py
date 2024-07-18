@@ -55,7 +55,6 @@ class PersonalInformationViewSet(ModelViewSet):
         "address",
         "linkedIn",
         "github",
-        "website",
     ]
     search_fields = [
         "full_name",
@@ -64,7 +63,6 @@ class PersonalInformationViewSet(ModelViewSet):
         "address",
         "linkedIn",
         "github",
-        "website",
     ]
     ordering_fields = [
         "full_name",
@@ -72,7 +70,6 @@ class PersonalInformationViewSet(ModelViewSet):
         "phone_number" "address",
         "linkedIn",
         "github",
-        "website",
     ]
     ordering = ["full_name"]
 

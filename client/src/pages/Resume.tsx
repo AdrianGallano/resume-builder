@@ -4,7 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from "../@/components/ui/tabs";
 import { Avatar, AvatarImage, AvatarFallback } from "../@/components/ui/avatar";
 import { Label } from "../@/components/ui/label";
 import { Input } from "../@/components/ui/input";
-import { Badge } from "../@/components/ui/badge"
+import { Badge } from "../@/components/ui/badge";
 import {
   Select,
   SelectTrigger,
@@ -15,6 +15,7 @@ import {
 import { Textarea } from "../@/components/ui/textarea";
 import { Card, CardContent } from "../@/components/ui/card";
 import { Link } from "react-router-dom";
+import ResumeFull from "../components/ResumeFull";
 
 export default function Resume() {
   const [selectedTab, setSelectedTab] = useState("your-details");
@@ -24,17 +25,15 @@ export default function Resume() {
   };
 
   const [industryKnowledge, setIndustryKnowledge] = useState([
-    "Product Design",
-    "User Interface",
-    "User Experience",
-    "Wireframing",
-    "SaaS",
-    "Interaction Design",
-    "Wire-framing",
-    "Mobile Application",
-    "Web Application",
-    "User Flow",
-  ])
+    "Data Structures",
+    "Software Methodology",
+    "Algorithms Analysis",
+    "Database Management",
+    "Artificial Intelligence",
+    "Internet Technology",
+    "Systems Programming",
+    "Computer Architecture",
+  ]);
   const [toolsTechnologies, setToolsTechnologies] = useState([
     "Figma",
     "Sketch",
@@ -45,8 +44,8 @@ export default function Resume() {
     "Amplitude",
     "Zeplin",
     "Google Analytics",
-  ])
-  const [otherSkills, setOtherSkills] = useState(["HTML", "CSS", "jQuery"])
+  ]);
+  const [otherSkills, setOtherSkills] = useState(["HTML", "CSS", "jQuery"]);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -75,53 +74,55 @@ export default function Resume() {
         <section className="flex-1 p-4 bg-white rounded-lg shadow">
           {selectedTab === "your-details" && (
             <div>
-              <div className="flex items-center space-x-4">
-                <Avatar>
-                  <AvatarImage src="/placeholder-user.jpg" />
-                  <AvatarFallback>MA</AvatarFallback>
-                </Avatar>
-                <Button variant="outline" size="icon">
-                  <PlusIcon className="w-6 h-6" />
-                </Button>
-              </div>
+              <h2 className="text-2xl font-bold mb-2">Personal Information</h2>
+              <p className="text-muted-foreground mb-4">
+                Add some basic details.
+              </p>
               <form className="mt-4 space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="job-title">Job Title</Label>
-                  <Input id="job-title" placeholder="Senior Product Designer" />
+                  <Label htmlFor="full-name">Full Name</Label>
+                  <Input id="full-name" placeholder="First Last" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="first-name">First Name</Label>
-                    <Input id="first-name" placeholder="Maksud" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="last-name">Last Name</Label>
-                    <Input id="last-name" placeholder="Alam" />
-                  </div>
-                </div>
+
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" placeholder="maksud@musemind.agency" />
+                    <Input id="email" placeholder="email@gmail.com" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone</Label>
                     <div className="flex items-center space-x-2">
                       <Select>
                         <SelectTrigger id="country-code">
-                          <SelectValue placeholder="+880" />
+                          <SelectValue placeholder="+1" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="+880">+880</SelectItem>
+                          <SelectItem value="+1">+1</SelectItem>
                         </SelectContent>
                       </Select>
                       <Input id="phone" placeholder="123 456 7890" />
                     </div>
                   </div>
                 </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="github">GitHub</Label>
+                    <Input id="github" placeholder="github.com/username" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="linkedin">LinkedIn</Label>
+                    <Input
+                      id="linkedin"
+                      placeholder="linkedin.com/in/username"
+                    />
+                  </div>
+                </div>
                 <div className="space-y-2">
                   <Label htmlFor="address">Address</Label>
-                  <Input id="address" placeholder="Dhaka, Bangladesh" />
+                  <Input
+                    id="address"
+                    placeholder="123 Street Name, Town, State 12345"
+                  />
                 </div>
                 <div className="flex justify-between">
                   <Button variant="outline">Back</Button>
@@ -174,17 +175,30 @@ export default function Resume() {
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="text-lg font-semibold">
-                          Senior Product Designer, Musemind - UI/UX Design
-                          Agency
+                          Software Engineer Intern, Electronics Company
                         </h3>
                         <p className="text-sm text-muted-foreground">
-                          Dhaka, Bangladesh - (02/08/2021 - present)
+                          City, State / May 2020 - August 2020
                         </p>
                         <ul className="list-disc list-inside">
-                          <li>Designed high-fidelity visual designs.</li>
                           <li>
-                            Created design specifications and documentation for
-                            development teams.
+                            Developed a service to automatically perform a set
+                            of unit tests daily on a product in development.
+                          </li>
+                          <li>
+                            Incorporated scripts using Python and PowerShell to
+                            aggregate XML test results into an organized format.
+                          </li>
+                          <li>
+                            Utilized Jenkins for continuous integration to
+                            automate the entire process of loading the latest
+                            build code and test files, running tests, and
+                            generating reports.
+                          </li>
+                          <li>
+                            Explored ways to visualize and send a daily report
+                            of test results to team members using HTML,
+                            JavaScript, and CSS.
                           </li>
                         </ul>
                         <Link to="#" className="text-sm text-primary">
@@ -207,47 +221,31 @@ export default function Resume() {
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="text-lg font-semibold">
-                          Product Designer, Lunchbox
+                          Front End Developer Intern, Startup, Inc
                         </h3>
                         <p className="text-sm text-muted-foreground">
-                          Ukraine, Kiev - (01/01/2020 - 01/07/2021)
+                          City, State / May 2019 - August 2019
                         </p>
                         <ul className="list-disc list-inside">
                           <li>
-                            Designed and launched several digital products for
-                            clients in the hospitality industry, including a
-                            mobile ordering and payment app.
+                            Assisted in the development of the front end of a
+                            mobile application for iOS/Android using Dart and
+                            the Flutter framework.
                           </li>
-                        </ul>
-                        <Link to="#" className="text-sm text-primary">
-                          See more
-                        </Link>
-                      </div>
-                      <div className="flex space-x-2">
-                        <Button variant="ghost" size="icon">
-                          <FilePenIcon className="w-4 h-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon">
-                          <TrashIcon className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="pt-5">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="text-lg font-semibold">
-                          UX Designer, Moonson
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          Dhaka, Bangladesh - (01/06/2019 - 31/12/2019)
-                        </p>
-                        <ul className="list-disc list-inside">
                           <li>
-                            Designed high-fidelity visual designs and created
-                            design specifications for development teams.
+                            Worked with Google Firebase to manage user input
+                            data across multiple platforms including web and
+                            mobile apps.
+                          </li>
+                          <li>
+                            Collaborated with team members using version control
+                            systems such as Git to organize modifications and
+                            assign tasks.
+                          </li>
+                          <li>
+                            Utilized Android Studio as a development environment
+                            to visualize the application in both iOS and
+                            Android.
                           </li>
                         </ul>
                         <Link to="#" className="text-sm text-primary">
@@ -280,13 +278,16 @@ export default function Resume() {
           {selectedTab === "education" && (
             <div className="flex-1 space-y-4">
               <h2 className="text-2xl font-bold">Education</h2>
-              <p className="text-muted-foreground">Review your education history</p>
+              <p className="text-muted-foreground">
+                Review your education history
+              </p>
               <div className="mt-4 space-y-4">
                 <div className="flex items-start justify-between p-4 border rounded-md shadow-sm">
                   <div>
-                    <h3 className="text-lg font-semibold">BFA Industrial Design</h3>
-                    <p>Rhode Island School - 2013</p>
-                    <p className="text-muted-foreground">Top 3% class GPA</p>
+                    <h3 className="text-lg font-semibold">
+                      Bachelor of Science in Computer Science
+                    </h3>
+                    <p>State University - May 2021</p>
                   </div>
                   <div className="flex space-x-2">
                     <Button variant="ghost" size="icon">
@@ -297,22 +298,10 @@ export default function Resume() {
                     </Button>
                   </div>
                 </div>
-                <div className="flex items-start justify-between p-4 border rounded-md shadow-sm">
-                  <div>
-                    <h3 className="text-lg font-semibold">Best SAT Distinction</h3>
-                    <p>Mayor of Ohio - 2016</p>
-                    <p className="text-muted-foreground">Top 3% class GPA</p>
-                  </div>
-                  <div className="flex space-x-2">
-                    <Button variant="ghost" size="icon">
-                      <FilePenIcon className="w-4 h-4" />
-                    </Button>
-                    <Button variant="ghost" size="icon">
-                      <TrashIcon className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-                <Button variant="outline" className="flex items-center space-x-2">
+                <Button
+                  variant="outline"
+                  className="flex items-center space-x-2"
+                >
                   <PlusIcon className="w-4 h-4" />
                   <span>Add Education</span>
                 </Button>
@@ -326,176 +315,81 @@ export default function Resume() {
 
           {selectedTab === "skills" && (
             <div className="flex-1 space-y-4">
-            <Tabs>
-              <div>
+              <Tabs>
                 <div>
-                  <div className="space-y-4">
-                    <h2 className="text-2xl font-bold">Skills</h2>
-                    <p className="text-muted-foreground">Highlight six to eight of your top skills</p>
+                  <div>
                     <div className="space-y-4">
-                      <div>
-                        <h3 className="font-semibold">Industry Knowledge</h3>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {industryKnowledge.map((skill, index) => (
-                            <Badge key={index} variant="secondary">
-                              {skill}{" "}
-                              <Button variant="ghost" size="sm">
-                                ×
-                              </Button>
-                            </Badge>
-                          ))}
-                          <Button variant="outline" size="sm">
-                            Add skills
-                          </Button>
+                      <h2 className="text-2xl font-bold">Skills</h2>
+                      <p className="text-muted-foreground">
+                        Highlight six to eight of your top skills
+                      </p>
+                      <div className="space-y-4">
+                        <div>
+                          <h3 className="font-semibold">Industry Knowledge</h3>
+                          <div className="flex flex-wrap gap-2 mt-2">
+                            {industryKnowledge.map((skill, index) => (
+                              <Badge key={index} variant="secondary">
+                                {skill}{" "}
+                                <Button variant="ghost" size="sm">
+                                  ×
+                                </Button>
+                              </Badge>
+                            ))}
+                            <Button variant="outline" size="sm">
+                              Add skills
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold">Tools & Technologies</h3>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {toolsTechnologies.map((skill, index) => (
-                            <Badge key={index} variant="secondary">
-                              {skill}{" "}
-                              <Button variant="ghost" size="sm">
-                                ×
-                              </Button>
-                            </Badge>
-                          ))}
-                          <Button variant="outline" size="sm">
-                            Add skills
-                          </Button>
+                        <div>
+                          <h3 className="font-semibold">
+                            Tools & Technologies
+                          </h3>
+                          <div className="flex flex-wrap gap-2 mt-2">
+                            {toolsTechnologies.map((skill, index) => (
+                              <Badge key={index} variant="secondary">
+                                {skill}{" "}
+                                <Button variant="ghost" size="sm">
+                                  ×
+                                </Button>
+                              </Badge>
+                            ))}
+                            <Button variant="outline" size="sm">
+                              Add skills
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold">Other Skills</h3>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {otherSkills.map((skill, index) => (
-                            <Badge key={index} variant="secondary">
-                              {skill}{" "}
-                              <Button variant="ghost" size="sm">
-                                ×
-                              </Button>
-                            </Badge>
-                          ))}
-                          <Button variant="outline" size="sm">
-                            Add skills
-                          </Button>
+                        <div>
+                          <h3 className="font-semibold">Other Skills</h3>
+                          <div className="flex flex-wrap gap-2 mt-2">
+                            {otherSkills.map((skill, index) => (
+                              <Badge key={index} variant="secondary">
+                                {skill}{" "}
+                                <Button variant="ghost" size="sm">
+                                  ×
+                                </Button>
+                              </Badge>
+                            ))}
+                            <Button variant="outline" size="sm">
+                              Add skills
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </Tabs>
+              <div className="flex justify-between mt-8">
+                <Button variant="outline">Back</Button>
+                <Button className="bg-primary text-primary-foreground">
+                  Save & Next
+                </Button>
               </div>
-            </Tabs>
-            <div className="flex justify-between mt-8">
-              <Button variant="outline">Back</Button>
-              <Button className="bg-primary text-primary-foreground">Save & Next</Button>
             </div>
-          </div>
           )}
         </section>
         <section className="flex-1 p-4 bg-white rounded-lg shadow">
-          <div className="p-4 bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg">
-            <div className="flex items-center space-x-4">
-              <Avatar>
-                <AvatarImage src="/placeholder-user.jpg" />
-                <AvatarFallback>MA</AvatarFallback>
-              </Avatar>
-              <div>
-                <h2 className="text-xl font-bold">MAKSUD ALAM</h2>
-                <p className="text-sm">Senior Product Designer</p>
-                <p className="text-sm text-muted-foreground">
-                  I'm a Senior Product Designer at MuseMind, creating
-                  meaningful, user-centered experiences. With a decade of design
-                  experience and a passion for pushing the boundaries of design.
-                </p>
-              </div>
-            </div>
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold">Work Experience</h3>
-              <div className="mt-2 space-y-2">
-                <div>
-                  <h4 className="font-medium">
-                    Senior Product Designer, Musemind Digital Agency
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    Dhaka, Bangladesh / 02/08/2021 - present
-                  </p>
-                  <ul className="text-sm list-disc list-inside">
-                    <li>Designed high-fidelity visual designs.</li>
-                    <li>
-                      Created design specifications and documentation for
-                      development teams.
-                    </li>
-                    <li>
-                      Mentored junior designers and conducted design reviews to
-                      maintain design quality and consistency.
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-medium">Product Designer, Lunchbox</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Ukraine, Kiev / 01/01/2020 - 01/07/2021
-                  </p>
-                  <ul className="text-sm list-disc list-inside">
-                    <li>
-                      Designed and launched several digital products for clients
-                      in the hospitality industry, including a mobile ordering
-                      and payment app.
-                    </li>
-                    <li>
-                      Worked closely with developers to ensure design
-                      feasibility and quality.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold">Education</h3>
-              <div className="mt-2 space-y-2">
-                <div>
-                  <h4 className="font-medium">BFA Industrial Design</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Rhode Island School - 2013
-                  </p>
-                  <p className="text-sm">Top 3% class GPA</p>
-                </div>
-                <div>
-                  <h4 className="font-medium">BA in Interaction Design</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Brown University - 2016
-                  </p>
-                  <p className="text-sm">Top 3% class GPA</p>
-                </div>
-              </div>
-            </div>
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold">Skills</h3>
-              <div className="mt-2 space-y-2">
-                <div>
-                  <h4 className="font-medium">Industry Knowledge</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Product Design, User Interface, User Experience, Interaction
-                    Design, Wire-framing
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-medium">Tools & Technologies</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Figma, Sketch, Prototyping, Framer, Invision, Abstract,
-                    Zeplin, Google Analytics
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-medium">Other Skills</h4>
-                  <p className="text-sm text-muted-foreground">
-                    HTML, CSS, jQuery
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ResumeFull />
         </section>
       </main>
     </div>

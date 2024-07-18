@@ -26,7 +26,6 @@ class PersonalInformation(models.Model):
     address = models.TextField()
     linkedIn = models.URLField(blank=True, null=True)
     github = models.URLField(blank=True, null=True)
-    website = models.URLField(blank=True, null=True)
     
     def __str__(self):
         return self.full_name
