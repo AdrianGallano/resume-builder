@@ -1,24 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../@/components/ui/input';
 import { Button } from '../@/components/ui/button';
 import { IFormInput, schema } from '../Schemas/LoginSchema';
-import { Link } from 'react-router-dom'; // Assuming you are using react-router-dom for routing
-import COVER_IMG from '../assets/images/blue-cover.jpg'
+import { Link } from 'react-router-dom';
+import COVER_IMG from '../assets/images/blue-cover.jpg';
+import { useLoginMutation } from '../redux/api/authApi';
+import { useAppDispatch } from '../redux/hooks';
+import { setAuthTokensOnLogin } from '../redux/features/authSlice';
 
 const Login: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
     resolver: zodResolver(schema),
   });
 
+  const [errorDetail, setErrorDetail] = useState<string | null>(null); // State to hold error detail message
+  const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useAppDispatch();
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
-      console.log('success');
-      // const response = await axios.post('/api/login', data);
-      // handle success (e.g., navigate to dashboard, store token)
-    } catch (error) {
-      // handle error (e.g., show error message)
+      const result = await login(data).unwrap();
+      dispatch(setAuthTokensOnLogin({
+        token: result.access,
+        refreshToken: result.refresh,
+      }));
+      console.log('Login successful:', result);
+      // Handle successful login (e.g., redirect to dashboard)
+    } catch (err: any) {
+      if (err.data && err.data.detail) {
+        setErrorDetail(err.data.detail);
+      } else {
+        setErrorDetail('Failed to login. Please try again later.'); // Fallback message
+      }
     }
   };
 
@@ -36,13 +51,13 @@ const Login: React.FC = () => {
           <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Email</label>
+              <label className="block text-gray-700 mb-2">Username</label>
               <Input
-                type="email"
-                {...register('email')}
+                type="username"
+                {...register('username')}
                 className="mb-1 w-full"
               />
-              {errors.email && <p className="text-red-500 text-sm">{errors.email?.message}</p>}
+              {errors.username && <p className="text-red-500 text-sm">{errors.username?.message}</p>}
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 mb-2">Password</label>
@@ -54,6 +69,11 @@ const Login: React.FC = () => {
               {errors.password && <p className="text-red-500 text-sm">{errors.password?.message}</p>}
             </div>
             <Button type="submit" className="w-full bg-blue-500 text-white rounded">Login</Button>
+            {errorDetail && (
+              <div className="mt-4 text-red-500">
+                <p>{errorDetail}</p>
+              </div>
+            )}
           </form>
           <div className="mt-4 text-center">
             <p className="text-gray-600">New user? <Link to="/" className="text-blue-500">Sign Up here</Link></p>

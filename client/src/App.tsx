@@ -1,5 +1,7 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import { Provider } from 'react-redux';
+import { store } from "./redux/store";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -9,6 +11,7 @@ import Document from "./pages/Document";
 
 function App() {
   return (
+    <Provider store={store}>
     <div className="App">
       <Routes>
         <Route path="/" element={<SignUp />} />
@@ -19,6 +22,7 @@ function App() {
         <Route path="/doc" element={<Document />} />
       </Routes>
     </div>
+    </Provider>
   );
 }
 
