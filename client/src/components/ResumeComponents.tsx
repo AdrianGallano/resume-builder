@@ -32,12 +32,10 @@ export const List: React.FC<{ items: string[], isGrid?: boolean }> = ({ items, i
     listStyleType: isGrid ? 'none' : 'disc',
     display: isGrid ? 'grid' : 'block',
     gridTemplateColumns: isGrid ? 'repeat(3, 1fr)' : 'none',
+    gap: isGrid ? '0.5em' : 'none'
   }}>
     {items.map((item, index) => (
-      <li key={index} style={{ marginBottom: '0.5em', display: 'flex', alignItems: 'flex-start' }}>
-        <span style={{ marginRight: '0.5em' }}>{isGrid && '•'}</span>
-        {item}
-      </li>
+      <li key={index} style={{ marginBottom: '0.5em' }}>{item}</li>
     ))}
   </ul>
 );
