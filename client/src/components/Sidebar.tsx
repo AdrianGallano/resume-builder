@@ -25,12 +25,12 @@ export default function Sidebar() {
         </Link>
         <Link to="#" className="flex items-center space-x-2 text-gray-600">
           <LinkIcon className="w-5 h-5" />
-          <span>Profile</span>
+          <span>Logout</span>
         </Link>
-        <Link to="#" className="flex items-center space-x-2 text-gray-600">
+        {/* <Link to="#" className="flex items-center space-x-2 text-gray-600">
           <AppleIcon className="w-5 h-5" />
           <span>Settings</span>
-        </Link>
+        </Link> */}
       </nav>
       <div className="mt-8 p-4 bg-white rounded-lg shadow">
         <div className="flex items-center space-x-4">
@@ -39,7 +39,7 @@ export default function Sidebar() {
             <AvatarFallback>AB</AvatarFallback>
           </Avatar>
           <div className="text-left">
-            <p className="text-sm font-medium">Complete your profile!</p>
+            <p className="text-sm font-medium">Complete your resume!</p>
             <p className="text-xs text-gray-500">
               For better recommendations please provide your details.
             </p>
