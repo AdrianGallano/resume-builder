@@ -59,8 +59,8 @@ export default function Dashboard() {
               <ArrowRightIcon className="w-5 h-5" />
             </Button>
           </div>
-          <Tabs>
-            <TabsList>
+          <Tabs className="text-left">
+            <TabsList className="mb-4">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="resume">Resume</TabsTrigger>
               <TabsTrigger value="cover-letters">Cover Letters</TabsTrigger>

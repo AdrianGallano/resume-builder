@@ -39,7 +39,7 @@ export default function Sidebar() {
             <AvatarFallback>AB</AvatarFallback>
           </Avatar>
           <div className="text-left">
-            <p className="text-sm font-medium">Complete your resume!</p>
+            <p className="text-sm font-medium">Complete your profile!</p>
             <p className="text-xs text-gray-500">
               For better recommendations please provide your details.
             </p>

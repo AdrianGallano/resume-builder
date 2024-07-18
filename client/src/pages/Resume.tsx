@@ -19,6 +19,11 @@ import ResumeFull from "../components/ResumeFull";
 
 export default function Resume() {
   const [selectedTab, setSelectedTab] = useState("your-details");
+  const [heading, setHeading] = useState("Your CV heading");
+
+  const handleHeadingChange = (e: React.FormEvent<HTMLHeadingElement>) => {
+    setHeading(e.currentTarget.textContent || "Your CV heading");
+  };
 
   const handleTabChange = (value: string) => {
     setSelectedTab(value);
@@ -54,7 +59,13 @@ export default function Resume() {
           <Button variant="ghost" size="icon">
             <ArrowLeftIcon className="w-6 h-6" />
           </Button>
-          <h1 className="text-xl font-semibold">Your CV heading</h1>
+          <h1
+            className="text-xl font-semibold"
+            contentEditable
+            onBlur={handleHeadingChange}
+          >
+            {heading}
+          </h1>
         </div>
         <Tabs
           value={selectedTab}
