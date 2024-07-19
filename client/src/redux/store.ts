@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./features/authSlice"; // Import your authSlice reducer here
 import { authApi } from "./api/authApi";
-import resumeReducer from "./features/resumeSlice";
+// import resumeReducer from "./features/resumeSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer, // Include your authSlice reducer in the reducer object
     [authApi.reducerPath]: authApi.reducer,
-    resume: resumeReducer,
+    // resume: resumeReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(authApi.middleware),
