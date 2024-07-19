@@ -1,4 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createResume } from "../redux/features/resumeSlice";
+import { RootState, AppDispatch } from "../redux/store";
+import { Link } from "react-router-dom";
 import { Avatar, AvatarImage, AvatarFallback } from "../@/components/ui/avatar";
 import { Progress } from "../@/components/ui/progress";
 import { Button } from "../@/components/ui/button";
@@ -23,7 +28,16 @@ import Sidebar from "../components/Sidebar";
 import Headerx from "../components/Header";
 
 export default function Dashboard() {
-  const navigate=useNavigate()
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, error } = useSelector((state: RootState) => state.resume);
+
+  const handleCreateResume = async () => {
+    const resultAction = await dispatch(createResume());
+    if (createResume.fulfilled.match(resultAction)) {
+      navigate("/resume");
+    }
+  };
   return (
     <div className="flex min-h-screen">
       <Sidebar />
@@ -44,8 +58,12 @@ export default function Dashboard() {
             What Do You Want To Create.
           </p>
           <div className="flex space-x-4 mb-8">
-            <Button variant="default" className="flex items-center space-x-2"
-            onClick={()=>navigate('/resume')}>
+            <Button
+              variant="default"
+              className="flex items-center space-x-2"
+              onClick={handleCreateResume}
+              disabled={loading}
+            >
               <FileIcon className="w-5 h-5" />
               <span>Resume</span>
             </Button>
@@ -61,8 +79,8 @@ export default function Dashboard() {
               <ArrowRightIcon className="w-5 h-5" />
             </Button>
           </div>
-          <Tabs>
-            <TabsList>
+          <Tabs className="text-left">
+            <TabsList className="mb-4">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="resume">Resume</TabsTrigger>
               <TabsTrigger value="cover-letters">Cover Letters</TabsTrigger>
