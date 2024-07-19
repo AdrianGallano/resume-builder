@@ -59,7 +59,7 @@ class ResumeSerializer(ModelSerializer):
     skills = SkillsSerializer(many=True, read_only=True)
     projects = ProjectsSerializer(many=True, read_only=True)
     certifications = CertificationsSerializer(many=True, read_only=True)
-    personal_information = PersonalInformationSerializer(read_only=True)
+    personal_information = PersonalInformationSerializer(many=True, read_only=True)
 
     class Meta:
         model = Resume
