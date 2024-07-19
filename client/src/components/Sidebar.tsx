@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Avatar, AvatarImage, AvatarFallback } from "../@/components/ui/avatar";
 import { Progress } from "../@/components/ui/progress";
 import { Button } from "../@/components/ui/button";
 import "../app/globals.css";
+import { useLogout } from "../hooks/useLogout";
 
 export default function Sidebar() {
+  const navigate=useNavigate()
+  const { handleLogout } = useLogout();
+
   return (
     <aside className="w-64 p-4 bg-gray-50">
       <div className="flex items-center mb-8">
@@ -23,10 +27,13 @@ export default function Sidebar() {
           <FilesIcon className="w-5 h-5" />
           <span>Documents</span>
         </Link>
-        <Link to="#" className="flex items-center space-x-2 text-gray-600">
+        <button
+          onClick={handleLogout}
+          className="flex items-center space-x-2 text-gray-600 w-full text-left"
+        >
           <LinkIcon className="w-5 h-5" />
           <span>Logout</span>
-        </Link>
+        </button>
         {/* <Link to="#" className="flex items-center space-x-2 text-gray-600">
           <AppleIcon className="w-5 h-5" />
           <span>Settings</span>
@@ -47,7 +54,8 @@ export default function Sidebar() {
         </div>
         <div className="mt-4 flex items-center space-x-2">
           <Progress value={50} className="w-full" />
-          <Button variant="outline" className="ml-auto">
+          <Button variant="outline" className="ml-auto"
+          onClick={()=>navigate("/profile")}>
             Complete Now
           </Button>
         </div>
