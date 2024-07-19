@@ -8,7 +8,18 @@ import educationReducer from "./features/resume/educationSlice"; // Import your 
 import projectsReducer from "./features/resume/project"; // Import your projectsSlice reducer here
 import skillsReducer from "./features/resume/skills"; // Import your skillsSlice reducer here
 import certificationsReducer from "./features/resume/certifications"; // Import your certificationsSlice reducer here
+import api from "./api/resumeApi";
 
+
+const preloadedState={
+  auth:{
+    username: localStorage.getItem('username'),
+    email: localStorage.getItem('email'),
+    id: parseInt(localStorage.getItem('id') as string),
+    token: localStorage.getItem('accessToken'),
+    refreshToken: localStorage.getItem('refreshToken')
+  }
+}
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -20,9 +31,10 @@ export const store = configureStore({
     skills: skillsReducer,
     certifications: certificationsReducer,
     [authApi.reducerPath]: authApi.reducer,
-  },
+    [api.reducerPath]: api.reducer,
+  },preloadedState,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware,api.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

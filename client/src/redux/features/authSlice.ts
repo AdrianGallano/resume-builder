@@ -24,8 +24,16 @@ const authSlice = createSlice({
     setAuthTokensOnLogin: (state, action: PayloadAction<{ token: string, refreshToken: string }>) => {
       state.token = action.payload.token;
       state.refreshToken = action.payload.refreshToken;
-      localStorage.setItem('token', action.payload.token);
+      localStorage.setItem('accessToken', action.payload.token);
       localStorage.setItem('refreshToken', action.payload.refreshToken);
+    },
+    setUserDetails: (state, action: PayloadAction<{ username: string, email: string, id: number }>) => {
+      state.username = action.payload.username;
+      state.email = action.payload.email;
+      state.id = action.payload.id;
+      localStorage.setItem('username', action.payload.username);
+      localStorage.setItem('email', action.payload.email);
+      localStorage.setItem('id', action.payload.id.toString());
     },
     clearAuthData: (state) => {
       state.username = null;
@@ -42,5 +50,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setAuthDataOnSignup, setAuthTokensOnLogin, clearAuthData } = authSlice.actions;
+export const { setAuthDataOnSignup, setAuthTokensOnLogin, setUserDetails, clearAuthData } = authSlice.actions;
 export default authSlice.reducer;

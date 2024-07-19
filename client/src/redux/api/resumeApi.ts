@@ -6,7 +6,19 @@ const baseUrl = 'http://127.0.0.1:8000/api';
 
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl ,
+    // prepareHeaders: (headers, { getState }) => {
+    //   // Add Basic Auth credentials if needed
+    //   const username ='javeriazaheer'
+    //   const password = '21082003jz'; 
+    //   const encodedCredentials = btoa(`${username}:${password}`);
+    //   headers.set('Authorization', `Basic ${encodedCredentials}`);
+  
+    //   return headers;
+    // },
+
+  }),
+ 
   endpoints: (builder) => ({
     // Personal Information Endpoints
     getPersonalInformations: builder.query<PersonalInformation[], void>({

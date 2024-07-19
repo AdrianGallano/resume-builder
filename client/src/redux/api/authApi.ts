@@ -1,10 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AuthResponse, LoginRequest, SignUpRequest, SignUpResponse } from '../types/authTypes';
-
+import { AuthResponse, LoginRequest, SignUpRequest, SignUpResponse, UserResponse } from '../types/authTypes';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/api' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://127.0.0.1:8000/api',
+    // prepareHeaders: (headers, { getState }) => {
+    //   // Add Basic Auth credentials if needed
+    //   const username ='javeriazaheer'
+    //   const password = '21082003jz'; 
+    //   const encodedCredentials = btoa(`${username}:${password}`);
+    //   headers.set('Authorization', `Basic ${encodedCredentials}`);
+
+    //   return headers;
+    // },
+  }),
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (credentials) => ({
@@ -13,7 +23,7 @@ export const authApi = createApi({
         body: credentials,
       }),
     }),
-    signUp: builder.mutation<SignUpResponse,SignUpRequest>({
+    signUp: builder.mutation<SignUpResponse, SignUpRequest>({
       query: (userData) => ({
         url: '/auth/users/',
         method: 'POST',
@@ -27,7 +37,13 @@ export const authApi = createApi({
         body: refreshToken,
       }),
     }),
+    getUser: builder.query<UserResponse, void>({
+      query: () => ({
+        url: '/auth/users/me/',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useSignUpMutation, useRefreshMutation } = authApi;
+export const { useLoginMutation, useSignUpMutation, useRefreshMutation, useGetUserQuery } = authApi;
