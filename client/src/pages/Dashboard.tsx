@@ -1,7 +1,4 @@
-
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState, AppDispatch } from "../redux/store";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarImage, AvatarFallback } from "../@/components/ui/avatar";
 import { Progress } from "../@/components/ui/progress";
@@ -25,17 +22,19 @@ import "../app/globals.css";
 import { Badge } from "../@/components/ui/badge";
 import Sidebar from "../components/Sidebar";
 import Headerx from "../components/Header";
+import { useCreateResumeMutation } from "../redux/api/resumeApi";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 export default function Dashboard() {
-  const dispatch: AppDispatch = useDispatch();
+  const dipatch=useAppDispatch()
   const navigate = useNavigate();
-  // const { loading, error } = useSelector((state: RootState) => state.resume);
+  const [createResume] = useCreateResumeMutation()
+  const username=useAppSelector((state)=>state.auth.username)
+  const id=useAppSelector((state)=>state.auth.id)
+  console.log(username,id)
 
   const handleCreateResume = async () => {
-    // const resultAction = await dispatch(createResume());
-    // if (createResume.fulfilled.match(resultAction)) {
-    //   navigate("/resume");
-    // }
+    
   };
   return (
     <div className="flex min-h-screen">
