@@ -19,7 +19,7 @@ class ResumeTemplates(models.Model):
         return self.name
 
 class PersonalInformation(models.Model):
-    resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    resume = models.OneToOneField(Resume, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=255)
     email = models.EmailField()
     phone_number = models.CharField(max_length=15)
