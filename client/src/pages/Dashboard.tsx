@@ -24,6 +24,7 @@ import Sidebar from "../components/Sidebar";
 import Headerx from "../components/Header";
 import { useCreateResumeMutation } from "../redux/api/resumeApi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Resume } from "../redux/types/resume";
 
 export default function Dashboard() {
   const dipatch=useAppDispatch()
@@ -34,7 +35,21 @@ export default function Dashboard() {
   console.log(username,id)
 
   const handleCreateResume = async () => {
+  
+    const resumeData: Resume = {
+      title: `${username}'s resume`,
+      user: id!
+    };
+    try {
+      const result = await createResume(resumeData).unwrap();
+      console.log('Resume created successfully:', result);
+      navigate('/resume'); 
+    } catch (error) {
+      console.error('Failed to create resume:', error);
+    }
     
+  
+   
   };
   return (
     <div className="flex min-h-screen">
