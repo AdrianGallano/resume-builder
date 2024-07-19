@@ -8,20 +8,22 @@ import SignUp from "./pages/SignUp";
 import Resume from "./pages/Resume";
 import Template from "./pages/Template";
 import Document from "./pages/Document";
+import UserProfile from "./pages/Profile";
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dash" element={<Dashboard />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/temp" element={<Template />} />
-          <Route path="/doc" element={<Document />} />
-        </Routes>
-      </div>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dash" element={<Dashboard />} />
+        <Route path="/resume" element={<Resume />} />
+        <Route path="/temp" element={<Template />} />
+        <Route path="/doc" element={<Document />} />
+        <Route path="/profile" element={<UserProfile />} />
+      </Routes>
+    </div>
     </Provider>
   );
 }
