@@ -10,8 +10,42 @@ import { Card, CardContent } from "../@/components/ui/card";
 import placeholder from "../img/placeholder.png";
 import Headerx from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
+import { useCreateResumeMutation } from "../redux/api/resumeApi";
+import { useAppSelector } from "../redux/hooks";
+import { setResumeId } from "../redux/features/resume/resumeSlice";
+import { useDispatch } from "react-redux";
 
 export default function Template() {
+  const [createResume, { isLoading }] = useCreateResumeMutation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = useAppSelector((state) => state.auth.token);
+  const userId = useAppSelector((state) => state.auth.id);
+  const username = useAppSelector((state) => state.auth.username);
+
+  const handleCreateResume = async () => {
+    if (!token) {
+      console.error("User is not authenticated");
+      return;
+    }
+
+    if (!userId || !username) {
+      console.error("User data is not available");
+      return;
+    }
+
+    try {
+      const result = await createResume({
+        title: `${username}'s Resume`,
+        user: userId,
+      }).unwrap();
+      dispatch(setResumeId(result.id)); // Dispatch action to set resume ID
+      navigate("/resume");
+    } catch (error) {
+      console.error("Failed to create resume: ", error);
+    }
+  };
   return (
     <div className="flex min-h-screen">
       <Sidebar />
@@ -55,7 +89,13 @@ export default function Template() {
                   <Button variant="ghost" size="icon" className="rounded-full">
                     <StarIcon className="h-5 w-5" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="rounded-full">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="rounded-full"
+                    onClick={handleCreateResume}
+                    disabled={isLoading}
+                  >
                     <ExpandIcon className="h-5 w-5" />
                   </Button>
                 </div>
@@ -65,7 +105,7 @@ export default function Template() {
                   className="w-full"
                 />
                 <CardContent className="space-y-2">
-                  <h3 className="text-lg font-semibold">Template Name</h3>
+                  <h3 className="text-lg font-semibold">Professional CV</h3>
                   <p className="text-muted-foreground">Resume by Author</p>
                 </CardContent>
               </Card>

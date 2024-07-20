@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "../@/components/ui/tabs";
 import { Avatar, AvatarImage, AvatarFallback } from "../@/components/ui/avatar";
@@ -16,10 +16,26 @@ import { Textarea } from "../@/components/ui/textarea";
 import { Card, CardContent } from "../@/components/ui/card";
 import { Link } from "react-router-dom";
 import ResumeFull from "../components/ResumeFull";
+import { useCreatePersonalInformationMutation } from "../redux/api/resumeApi";
+import { useAppSelector } from "../redux/hooks";
+import { useNavigate } from "react-router-dom";
 
 export default function Resume() {
   const [selectedTab, setSelectedTab] = useState("your-details");
   const [heading, setHeading] = useState("Your CV heading");
+  const navigate = useNavigate();
+  const resumeId = useAppSelector((state) => state.resume.resumeId);
+  const [createPersonalInformation, { isLoading }] =
+    useCreatePersonalInformationMutation();
+  const userId = useAppSelector((state) => state.auth.id);
+
+  useEffect(() => {
+    if (!resumeId) {
+      // Redirect or show an error if resumeId is not set
+      console.error("Resume ID is not set. Please create a resume first.");
+      navigate("/template"); // Adjust the route as needed
+    }
+  }, [resumeId, navigate]);
 
   const handleHeadingChange = (e: React.FormEvent<HTMLHeadingElement>) => {
     setHeading(e.currentTarget.textContent || "Your CV heading");
@@ -51,6 +67,32 @@ export default function Resume() {
     "Google Analytics",
   ]);
   const [otherSkills, setOtherSkills] = useState(["HTML", "CSS", "jQuery"]);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!resumeId) {
+      console.error("Resume ID is not set. Please create a resume first.");
+      return;
+    }
+    const formData = new FormData(event.currentTarget);
+    const personalInfo = {
+      full_name: formData.get("full-name") as string,
+      email: formData.get("email") as string,
+      phone_number: formData.get("phone") as string,
+      address: formData.get("address") as string,
+      linkedIn: formData.get("linkedin") as string,
+      github: formData.get("github") as string,
+      resume: resumeId,
+    };
+
+    try {
+      await createPersonalInformation(personalInfo).unwrap();
+      console.log("Personal information submitted successfully");
+      setSelectedTab("short-bio");
+    } catch (error) {
+      console.error('Failed to create personal information: ', error);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -89,16 +131,26 @@ export default function Resume() {
               <p className="text-muted-foreground mb-4">
                 Add some basic details.
               </p>
-              <form className="mt-4 space-y-4">
+              <form onSubmit={handleSubmit} className="mt-4 space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="full-name">Full Name</Label>
-                  <Input id="full-name" placeholder="First Last" />
+                  <Input
+                    id="full-name"
+                    name="full-name"
+                    placeholder="First Last"
+                    required
+                  />
                 </div>
-
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" placeholder="email@gmail.com" />
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="email@gmail.com"
+                      required
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone</Label>
@@ -109,21 +161,32 @@ export default function Resume() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="+1">+1</SelectItem>
+                          {/* Add more country codes as needed */}
                         </SelectContent>
                       </Select>
-                      <Input id="phone" placeholder="123 456 7890" />
+                      <Input
+                        id="phone"
+                        name="phone"
+                        placeholder="123 456 7890"
+                        required
+                      />
                     </div>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="github">GitHub</Label>
-                    <Input id="github" placeholder="github.com/username" />
+                    <Input
+                      id="github"
+                      name="github"
+                      placeholder="github.com/username"
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="linkedin">LinkedIn</Label>
                     <Input
                       id="linkedin"
+                      name="linkedin"
                       placeholder="linkedin.com/in/username"
                     />
                   </div>
@@ -132,12 +195,16 @@ export default function Resume() {
                   <Label htmlFor="address">Address</Label>
                   <Input
                     id="address"
+                    name="address"
                     placeholder="123 Street Name, Town, State 12345"
+                    required
                   />
                 </div>
                 <div className="flex justify-between">
                   <Button variant="outline">Back</Button>
-                  <Button>Save & Next</Button>
+                  <Button type="submit" disabled={isLoading}>
+                    Save & Next
+                  </Button>
                 </div>
               </form>
             </div>

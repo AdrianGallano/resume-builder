@@ -44,6 +44,7 @@ export type Certification = {
   resume: number;
 };
 export type Resume = {
-    title: string;
-    user: number;
-  };
+  id: number; // Add this line
+  title: string;
+  user: number;
+};

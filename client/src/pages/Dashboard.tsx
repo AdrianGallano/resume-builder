@@ -22,34 +22,37 @@ import "../app/globals.css";
 import { Badge } from "../@/components/ui/badge";
 import Sidebar from "../components/Sidebar";
 import Headerx from "../components/Header";
-import { useCreateResumeMutation } from "../redux/api/resumeApi";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { Resume } from "../redux/types/resume";
+// import { useCreateResumeMutation } from "../redux/api/resumeApi";
+// import { useAppDispatch, useAppSelector } from "../redux/hooks";
+// import { Resume } from "../redux/types/resume";
 
 export default function Dashboard() {
-  const dipatch=useAppDispatch()
+  // const dipatch=useAppDispatch()
   const navigate = useNavigate();
-  const [createResume] = useCreateResumeMutation()
-  const username=useAppSelector((state)=>state.auth.username)
-  const id=useAppSelector((state)=>state.auth.id)
-  console.log(username,id)
+  // const [createResume] = useCreateResumeMutation()
+  // const username=useAppSelector((state)=>state.auth.username)
+  // const id=useAppSelector((state)=>state.auth.id)
+  // console.log(username,id)
 
-  const handleCreateResume = async () => {
+  // const handleCreateResume = async () => {
   
-    const resumeData: Resume = {
-      title: `${username}'s resume`,
-      user: id!
-    };
-    try {
-      const result = await createResume(resumeData).unwrap();
-      console.log('Resume created successfully:', result);
-      navigate('/resume'); 
-    } catch (error) {
-      console.error('Failed to create resume:', error);
-    }
+  //   const resumeData: Resume = {
+  //     title: `${username}'s resume`,
+  //     user: id!
+  //   };
+  //   try {
+  //     const result = await createResume(resumeData).unwrap();
+  //     console.log('Resume created successfully:', result);
+  //     navigate('/resume'); 
+  //   } catch (error) {
+  //     console.error('Failed to create resume:', error);
+  //   }
     
   
    
+  // };
+  const handleNavigateToTemp = () => {
+    navigate('/temp');
   };
   return (
     <div className="flex min-h-screen">
@@ -74,7 +77,7 @@ export default function Dashboard() {
             <Button
               variant="default"
               className="flex items-center space-x-2"
-              onClick={handleCreateResume}
+              onClick={handleNavigateToTemp}
               // disabled={loading}
             >
               <FileIcon className="w-5 h-5" />
