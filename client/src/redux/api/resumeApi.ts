@@ -21,10 +21,8 @@ export const resumeApi = createApi({
     // Personal Information Endpoints
     getPersonalInformations: builder.query<PersonalInformation[], void>({
       query: () => '/personal-informations',
-      query: () => '/personal-informations',
     }),
     getPersonalInformationById: builder.query<PersonalInformation, number>({
-      query: (id) => `/personal-informations/${id}`,
       query: (id) => `/personal-informations/${id}`,
     }),
     createPersonalInformation: builder.mutation<PersonalInformation, Partial<PersonalInformation>>({
@@ -37,7 +35,6 @@ export const resumeApi = createApi({
     updatePersonalInformation: builder.mutation<PersonalInformation, PersonalInformation>({
       query: (updatedInfo) => ({
         url: `/personal-informations/${updatedInfo.id}`,
-        url: `/personal-informations/${updatedInfo.id}`,
         method: 'PUT',
         body: updatedInfo,
       }),
@@ -45,14 +42,12 @@ export const resumeApi = createApi({
     deletePersonalInformation: builder.mutation<void, number>({
       query: (id) => ({
         url: `/personal-informations/${id}`,
-        url: `/personal-informations/${id}`,
         method: 'DELETE',
       }),
     }),
     // Resume Endpoints
     createResume: builder.mutation<Resume, Partial<Resume>>({
       query: (resumeData) => ({
-        url: '/resumes',
         url: '/resumes',
         method: 'POST',
         body: resumeData,
