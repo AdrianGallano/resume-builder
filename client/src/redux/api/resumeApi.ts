@@ -6,51 +6,49 @@ const baseUrl = 'http://127.0.0.1:8000/api';
 
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl ,
-    // prepareHeaders: (headers, { getState }) => {
-    //   // Add Basic Auth credentials if needed
-    //   const username ='javeriazaheer'
-    //   const password = '21082003jz'; 
-    //   const encodedCredentials = btoa(`${username}:${password}`);
-    //   headers.set('Authorization', `Basic ${encodedCredentials}`);
-  
-    //   return headers;
-    // },
+  baseQuery: fetchBaseQuery({ baseUrl,
+    prepareHeaders: (headers, { getState }) => {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
 
-  }),
+   
+    },
+   }),
  
   endpoints: (builder) => ({
     // Personal Information Endpoints
     getPersonalInformations: builder.query<PersonalInformation[], void>({
-      query: () => '/personal-informations/',
+      query: () => '/personal-informations',
     }),
     getPersonalInformationById: builder.query<PersonalInformation, number>({
-      query: (id) => `/personal-informations/${id}/`,
+      query: (id) => `/personal-informations/${id}`,
     }),
     createPersonalInformation: builder.mutation<PersonalInformation, Omit<PersonalInformation, 'id'>>({
       query: (newInfo) => ({
-        url: '/personal-informations/',
+        url: '/personal-informations',
         method: 'POST',
         body: newInfo,
       }),
     }),
     updatePersonalInformation: builder.mutation<PersonalInformation, PersonalInformation>({
       query: (updatedInfo) => ({
-        url: `/personal-informations/${updatedInfo.id}/`,
+        url: `/personal-informations/${updatedInfo.id}`,
         method: 'PUT',
         body: updatedInfo,
       }),
     }),
     deletePersonalInformation: builder.mutation<void, number>({
       query: (id) => ({
-        url: `/personal-informations/${id}/`,
+        url: `/personal-informations/${id}`,
         method: 'DELETE',
       }),
     }),
     // Resume Endpoints
     createResume: builder.mutation<Resume, Resume>({
       query: (resumeData) => ({
-        url: '/resumes/',
+        url: '/resumes',
         method: 'POST',
         body: resumeData,
       }),
@@ -58,7 +56,7 @@ export const api = createApi({
     // Work Experience Endpoints
     createWorkExperience: builder.mutation<WorkExperience, WorkExperience>({
       query: (workExperienceData) => ({
-        url: '/work-experiences/',
+        url: '/work-experiences',
         method: 'POST',
         body: workExperienceData,
       }),
@@ -66,7 +64,7 @@ export const api = createApi({
     // Education Endpoints
     createEducation: builder.mutation<Education, Education>({
       query: (educationData) => ({
-        url: '/educations/',
+        url: '/educations',
         method: 'POST',
         body: educationData,
       }),
@@ -74,7 +72,7 @@ export const api = createApi({
     // Projects Endpoints
     createProject: builder.mutation<Project, Project>({
       query: (projectData) => ({
-        url: '/projects/',
+        url: '/projects',
         method: 'POST',
         body: projectData,
       }),
@@ -82,7 +80,7 @@ export const api = createApi({
     // Skills Endpoints
     createSkill: builder.mutation<Skill, Skill>({
       query: (skillsData) => ({
-        url: '/skills/',
+        url: '/skills',
         method: 'POST',
         body: skillsData,
       }),
@@ -90,7 +88,7 @@ export const api = createApi({
     // Certifications Endpoints
     createCertification: builder.mutation<Certification, Certification>({
       query: (certificationData) => ({
-        url: '/certifications/',
+        url: '/certifications',
         method: 'POST',
         body: certificationData,
       }),
