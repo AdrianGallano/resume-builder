@@ -1,8 +1,4 @@
-
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createResume } from "../redux/features/resumeSlice";
-import { RootState, AppDispatch } from "../redux/store";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarImage, AvatarFallback } from "../@/components/ui/avatar";
 import { Progress } from "../@/components/ui/progress";
@@ -26,17 +22,34 @@ import "../app/globals.css";
 import { Badge } from "../@/components/ui/badge";
 import Sidebar from "../components/Sidebar";
 import Headerx from "../components/Header";
+import { useCreateResumeMutation } from "../redux/api/resumeApi";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Resume } from "../redux/types/resume";
 
 export default function Dashboard() {
-  const dispatch: AppDispatch = useDispatch();
+  const dipatch=useAppDispatch()
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state: RootState) => state.resume);
+  const [createResume] = useCreateResumeMutation()
+  const username=useAppSelector((state)=>state.auth.username)
+  const id=useAppSelector((state)=>state.auth.id)
+  console.log(username,id)
 
   const handleCreateResume = async () => {
-    const resultAction = await dispatch(createResume());
-    if (createResume.fulfilled.match(resultAction)) {
-      navigate("/resume");
+  
+    const resumeData: Resume = {
+      title: `${username}'s resume`,
+      user: id!
+    };
+    try {
+      const result = await createResume(resumeData).unwrap();
+      console.log('Resume created successfully:', result);
+      navigate('/resume'); 
+    } catch (error) {
+      console.error('Failed to create resume:', error);
     }
+    
+  
+   
   };
   return (
     <div className="flex min-h-screen">
@@ -62,7 +75,7 @@ export default function Dashboard() {
               variant="default"
               className="flex items-center space-x-2"
               onClick={handleCreateResume}
-              disabled={loading}
+              // disabled={loading}
             >
               <FileIcon className="w-5 h-5" />
               <span>Resume</span>

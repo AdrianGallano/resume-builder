@@ -27,3 +27,8 @@ export type AuthResponse ={
     token: string | null;
     refreshToken: string | null;
   }
+  export type UserResponse={
+    username: string 
+    email: string 
+    id: number 
+  }
