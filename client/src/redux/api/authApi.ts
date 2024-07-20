@@ -5,15 +5,15 @@ export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://127.0.0.1:8000/api',
-    // prepareHeaders: (headers, { getState }) => {
-    //   // Add Basic Auth credentials if needed
-    //   const username ='javeriazaheer'
-    //   const password = '21082003jz'; 
-    //   const encodedCredentials = btoa(`${username}:${password}`);
-    //   headers.set('Authorization', `Basic ${encodedCredentials}`);
+    prepareHeaders: (headers, { getState }) => {
+      // Add JWT token to headers if available
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
 
-    //   return headers;
-    // },
+   
+    },
   }),
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
